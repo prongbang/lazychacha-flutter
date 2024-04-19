@@ -4,7 +4,7 @@ import 'package:convert/convert.dart';
 import 'package:cryptography/cryptography.dart';
 
 abstract class LazyChaCha {
-  /// Constructs a LazyXChaCha.
+  /// Constructs a LazyChaCha.
   LazyChaCha();
 
   static LazyChaCha instance = LazyChaCha20Poly1305();
@@ -21,7 +21,7 @@ class LazyChaCha20Poly1305 implements LazyChaCha {
   Future<String> encrypt(String plaintext, String key) async {
     final secretKey = SecretKey(hex.decode(key));
     final secretBox =
-    await _chaCha20.encryptString(plaintext, secretKey: secretKey);
+        await _chaCha20.encryptString(plaintext, secretKey: secretKey);
     return hex.encode(secretBox.concatenation());
   }
 
@@ -35,7 +35,7 @@ class LazyChaCha20Poly1305 implements LazyChaCha {
       macLength: 16,
     );
     final plaintext =
-    await _chaCha20.decryptString(secretBox, secretKey: secretKey);
+        await _chaCha20.decryptString(secretBox, secretKey: secretKey);
     return plaintext;
   }
 }

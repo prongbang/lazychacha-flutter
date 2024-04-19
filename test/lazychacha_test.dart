@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lazychacha/keypair.dart';
 
@@ -24,7 +25,9 @@ void main() {
 
     // Then
     expect(actual, isNotNull);
-    print(actual);
+    if (kDebugMode) {
+      print(actual);
+    }
   });
 
   test('Should return plaintext when decrypt success', () async {
@@ -54,7 +57,8 @@ void main() {
           '{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIn0.rTCH8cLoGxAm_xw68z-zXVKi9ie6xJn9tnVWjd_9ftE"}';
 
       // When
-      final actualCipherText = await lazyChaCha.encrypt(plaintext, clientSharedKey);
+      final actualCipherText =
+          await lazyChaCha.encrypt(plaintext, clientSharedKey);
       final actualPlainText =
           await lazyChaCha.decrypt(actualCipherText, clientSharedKey);
 
