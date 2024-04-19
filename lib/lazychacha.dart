@@ -31,8 +31,8 @@ class LazyChaCha20Poly1305 implements LazyChaCha {
     final cipherBytes = hex.decode(ciphertext);
     final secretBox = SecretBox.fromConcatenation(
       cipherBytes,
-      nonceLength: 12,
-      macLength: 16,
+      nonceLength: _chaCha20.nonceLength,
+      macLength: _chaCha20.macAlgorithm.macLength,
     );
     final plaintext =
         await _chaCha20.decryptString(secretBox, secretKey: secretKey);
