@@ -25,9 +25,7 @@ void main() {
 
     // Then
     expect(actual, isNotNull);
-    if (kDebugMode) {
-      print(actual);
-    }
+    debugPrint(actual);
   });
 
   test('Should return plaintext when decrypt success', () async {
